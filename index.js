@@ -122,8 +122,7 @@ Use the getFlavorByIndex function below to do the following:
 
 
 function getFlavorByIndex(array, number){
-  const search = (element) => element === number;
-  return array.indexOf(search);
+  return array[number];
 }
 
 
@@ -142,8 +141,16 @@ Use the removeFlavorByName function below to do the following:
   HINT: You can use .splice() for this
 */
 
+function searchFlavorIndex(array,string) {
+  const search = (element) => element === string;
+  return array.findIndex(search);
+
+}
+
 function removeFlavorByName(array, string){
-  /*your code here*/
+  const searchedIndex = searchFlavorIndex(array,string)
+  array.splice(searchedIndex,1)
+  return array
 }
 
 
@@ -167,8 +174,17 @@ Use the filterByWord function below to do the following:
 */
 
 
-function filterByWord(/*your code here*/){
-  /*your code here*/
+function filterByWord(array, string){
+  let filteredArray = [];
+
+  for (let i = 0; i<array.length; i++) {
+    if (array[i].includes(string) === true) {
+      filteredArray.push(array[i])
+    }
+
+  }
+  
+  return filteredArray
 }
 
 
@@ -185,8 +201,13 @@ Use the getAverageWordLength function below to do the following:
   For example: getAverageWordLength(originalFlavors) should return a number between 0 and 3.     
 */
 
-function getAverageWordLength(/*code here*/){
-  /*code here*/
+function getAverageWordLength(array){
+  let wordTotal = 0;
+  for (let i = 0; i<array.length; i++) {
+    let words = array[i].split(" ");
+    wordTotal = wordTotal + words.length;
+  }
+  return wordTotal/array.length
 }
 
 
@@ -203,8 +224,18 @@ Use the getRandomFlavors function and new arrays below to do the following:
 */
 
 
-function getRandomFlavors(/*code here*/){
-  /*code here*/
+function getRandomFlavors(arr1, arr2, arr3, arr4){
+  const array = [...arr1,...arr2, ...arr3, ...arr4]
+  let randomArr = [];
+  while (randomArr.length < 31) {
+    let randomFlavor = array[Math.round(Math.random()*(array.length-1))]
+    if (randomArr.includes(randomFlavor) === false) {
+      randomArr.push(randomFlavor)
+
+    }
+
+  }
+  return randomArr
 }
 
 // NEW DATA ARRAYS FOR STRETCH 2 ⬇️
